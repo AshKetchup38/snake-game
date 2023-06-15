@@ -26,16 +26,15 @@ while game_over is False:
     time.sleep(0.1)
     snake.move()
     if snake.turtles[0].distance(food) < 15:
-        score_board.score += 1
+        score_board.increase_score()
         snake.add_tail()
-        score_board.update_score()
         food.move_food()
     if snake.turtles[0].xcor() > 280 or snake.turtles[0].xcor() < -280 or snake.turtles[0].ycor() > 280 or snake.turtles[0].ycor() < -280:
-        game_over = True
-        score_board.print_gameover()
+        score_board.check_score()
+        snake.reset()
     for turtle in snake.turtles[1:]:
         if snake.turtles[0].distance(turtle) < 10:
-            game_over = True
-            score_board.print_gameover()
+            score_board.check_score()
+            snake.reset()
 
 screen.exitonclick()
